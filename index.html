@@ -6,6 +6,10 @@
     <title>סטייל ביוטי - מוצרי טיפוח מקצועיים</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/he.js"></script>
     <style>
         * {
             margin: 0;
@@ -53,13 +57,39 @@
             gap: 10px;
         }
 
+        .logo img {
+            height: 90px !important;
+            width: 200px !important;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo::before {
+            content: none;
+        }
+
         .logo-text {
-            font-size: 2.5rem;
-            font-weight: bold;
+            display: none;
+        }
+
+        .logo-text::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
             background: linear-gradient(45deg, #DAA520, #B8860B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-text::after {
+            transform: scaleX(1);
         }
 
         .nav-menu {
@@ -81,13 +111,6 @@
         .cart-icon {
             position: relative;
             cursor: pointer;
-            font-size: 1.5rem;
-            color: #2c3e50;
-            transition: color 0.3s;
-        }
-
-        .cart-icon:hover {
-            color: #3498db;
         }
 
         .cart-count {
@@ -103,6 +126,180 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(45deg, var(--product-color) 0%, var(--product-color-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Product category colors */
+        .product-card[data-category="shampoo"] .product-image {
+            --product-color: #2980b9;
+            --product-color-light: #3498db;
+        }
+
+        .product-card[data-category="mask"] .product-image {
+            --product-color: #8e44ad;
+            --product-color-light: #9b59b6;
+        }
+
+        .product-card[data-category="oil"] .product-image {
+            --product-color: #d4ac0d;
+            --product-color-light: #f1c40f;
+        }
+
+        .product-card[data-category="styling"] .product-image {
+            --product-color: #27ae60;
+            --product-color-light: #2ecc71;
+        }
+
+        .product-card[data-category="scalp"] .product-image {
+            --product-color: #c0392b;
+            --product-color-light: #e74c3c;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #2980b9;
+        }
+
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #3498db;
+            color: #3498db;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-info i {
+            margin-left: 10px;
+            color: #3498db;
         }
 
         .hero-section {
@@ -154,7 +351,7 @@
             transform: translateY(-3px);
         }
 
-        /* מדור תמונות לפני/אחרי */
+        /* סגנונות למדור תמונות לפני/אחרי */
         .before-after-section {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 80px 0;
@@ -223,38 +420,10 @@
 
         .before-after-images img:first-child {
             border-right: 2px solid #e74c3c;
-            position: relative;
-        }
-
-        .before-after-images img:first-child::before {
-            content: 'לפני';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e74c3c;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
         }
 
         .before-after-images img:last-child {
             border-left: 2px solid #27ae60;
-            position: relative;
-        }
-
-        .before-after-images img:last-child::before {
-            content: 'אחרי';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #27ae60;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
         }
 
         .before-after-text {
@@ -273,179 +442,6 @@
             color: #666;
             font-size: 1.1rem;
             line-height: 1.6;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .categories {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            overflow-x: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .category-btn {
-            background: white;
-            border: 2px solid #3498db;
-            color: #3498db;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: #3498db;
-            color: white;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: linear-gradient(45deg, var(--product-color) 0%, var(--product-color-light) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2em;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .product-card[data-category="shampoo"] .product-image {
-            --product-color: #2980b9;
-            --product-color-light: #3498db;
-        }
-
-        .product-card[data-category="mask"] .product-image {
-            --product-color: #8e44ad;
-            --product-color-light: #9b59b6;
-        }
-
-        .product-card[data-category="oil"] .product-image {
-            --product-color: #d4ac0d;
-            --product-color-light: #f1c40f;
-        }
-
-        .product-card[data-category="styling"] .product-image {
-            --product-color: #27ae60;
-            --product-color-light: #2ecc71;
-        }
-
-        .product-card[data-category="scalp"] .product-image {
-            --product-color: #c0392b;
-            --product-color-light: #e74c3c;
-        }
-
-        .product-info {
-            padding: 15px;
-        }
-
-        .product-title {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .product-price {
-            color: #2c3e50;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .add-to-cart {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            width: 100%;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #2980b9;
-        }
-
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 40px 0;
-            margin-top: 60px;
-            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 10;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            padding: 0 20px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-section ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .contact-info i {
-            margin-left: 10px;
-            color: #3498db;
         }
 
         .hidden {
@@ -579,14 +575,14 @@
                 <p><i class="fas fa-envelope"></i>info@stylebeauty.co.il</p>
                 <p><i class="fas fa-map-marker-alt"></i>רחוב הראשי 123, תל אביב</p>
                 <p style="margin-top: 30px; opacity: 0.4; font-size: 12px;">
-                    © 2024 עטרה החלקות - סטייל ביוטי
+                    © 2024 עטרה החלקות
                 </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Product data
+        // Product data - הוספתי פה רק חלק מהמוצרים לחסוך מקום
         const products = {
             shampoo: [
                 { id: 1, name: "שמפו מזין לשיער יבש", price: 89.90, category: "shampoo" },
@@ -620,9 +616,7 @@
             ]
         };
 
-        // Cart functionality
-        let cartItems = [];
-
+        // Function to create product card
         function createProductCard(product) {
             return `
                 <div class="product-card" data-category="${product.category}">
@@ -638,6 +632,7 @@
             `;
         }
 
+        // Function to display products
         function displayProducts(category = 'all') {
             const productsGrid = document.getElementById('products-grid');
             productsGrid.innerHTML = '';
@@ -654,6 +649,9 @@
                 });
             }
         }
+
+        // Cart functionality
+        let cartItems = [];
 
         function addToCart(product) {
             cartItems.push(product);
