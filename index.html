@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>גלריית התמונות שלי</title>
+    <title>עטרה - החלקות שיער מקצועיות</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,10 +13,11 @@
         }
         
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #DAA520 50%, #B8860B 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #333;
         }
         
         .container {
@@ -23,36 +25,129 @@
             margin: 0 auto;
         }
         
-        h1 {
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        
+        .header h1::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            font-size: 2rem;
+            animation: sparkle 2s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+        
+        .header p {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0.95;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            background: rgba(255,255,255,0.1);
+            padding: 15px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .welcome-section {
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .welcome-section h2 {
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .welcome-section p {
+            color: #666;
+            font-size: 1.3rem;
+            line-height: 1.8;
+        }
+        
+        .services-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .service-item {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-title {
             text-align: center;
             color: white;
             font-size: 3rem;
             margin-bottom: 50px;
+            font-family: 'Playfair Display', serif;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
             padding: 20px;
         }
         
         .comparison-card {
-            background: white;
-            border-radius: 15px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.3);
         }
         
         .comparison-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
         }
         
         .comparison-images {
             display: flex;
-            height: 250px;
+            height: 300px;
+            position: relative;
         }
         
         .before-after {
@@ -65,131 +160,232 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
         
         .before-after:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         
         .label {
             position: absolute;
-            bottom: 10px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .before {
+            border-right: 3px solid #e74c3c;
+            position: relative;
+        }
+        
+        .before::after {
+            content: 'לפני';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
             font-size: 0.9rem;
             font-weight: bold;
         }
         
-        .before {
-            border-left: 3px solid #e74c3c;
+        .after {
+            border-left: 3px solid #27ae60;
+            position: relative;
         }
         
-        .after {
-            border-right: 3px solid #27ae60;
+        .after::after {
+            content: 'אחרי';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
         
         .card-info {
-            padding: 20px;
+            padding: 30px;
             text-align: center;
+            background: linear-gradient(135deg, rgba(218,165,32,0.1), rgba(184,134,11,0.1));
         }
         
         .card-title {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
+            color: #8B4513;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
         }
         
         .card-description {
             color: #666;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-size: 1.1rem;
         }
         
-        .welcome-section {
+        .treatment-type {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        
+        .contact-section {
             background: rgba(255,255,255,0.95);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
         }
         
-        .welcome-section h2 {
-            color: #333;
-            margin-bottom: 15px;
+        .contact-section h3 {
+            color: #8B4513;
             font-size: 2rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
         }
         
-        .welcome-section p {
-            color: #666;
-            font-size: 1.2rem;
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .contact-item {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .comparison-images {
+                height: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>✨ גלריית התמונות שלי</h1>
+        <div class="header">
+            <h1>עטרה</h1>
+            <p>החלקות שיער מקצועיות ומתקדמות</p>
+            <div class="subtitle">יופי, איכות ומקצועיות ברמה הגבוהה ביותר</div>
+        </div>
         
         <div class="welcome-section">
-            <h2>ברוכים הבאים לגלריה!</h2>
-            <p>כאן תוכלו לראות תמונות לפני ואחרי מרשימות</p>
+            <h2>ברוכים הבאים לסלון עטרה</h2>
+            <p>אנחנו מתמחים בהחלקות שיער מתקדמות עם התוצאות המרשימות ביותר. 
+            כל טיפול מותאם אישית לסוג השיער שלך למען תוצאה מושלמת ועמידה.</p>
+            
+            <div class="services-info">
+                <div class="service-item">החלקה יפנית מתקדמת</div>
+                <div class="service-item">החלקה ברזילאית טבעית</div>
+                <div class="service-item">טיפולי קרטין מקצועיים</div>
+                <div class="service-item">יעוץ מקצועי מותאם אישית</div>
+            </div>
         </div>
+        
+        <h2 class="gallery-title">גלריית תוצאות - לפני ואחרי</h2>
         
         <div class="gallery">
             <div class="comparison-card">
                 <div class="comparison-images">
                     <div class="before-after before">
-                        <img src="images/תמונה 1לפני.jfif" alt="תמונה 1 לפני">
-                        <div class="label">לפני</div>
+                        <img src="images/תמונה 1לפני.jfif" alt="שיער לפני החלקה - תמונה 1">
+                        <div class="label">לפני הטיפול</div>
                     </div>
                     <div class="before-after after">
-                        <img src="images/תמונה 1 אחרי.jfif" alt="תמונה 1 אחרי">
-                        <div class="label">אחרי</div>
+                        <img src="images/תמונה 1 אחרי.jfif" alt="שיער אחרי החלקה - תמונה 1">
+                        <div class="label">אחרי הטיפול</div>
                     </div>
                 </div>
                 <div class="card-info">
-                    <div class="card-title">השוואה ראשונה</div>
-                    <div class="card-description">תוצאות מרשימות של השינוי</div>
+                    <div class="card-title">החלקה יפנית מתקדמת</div>
+                    <div class="card-description">שיער קשיח ומתולתל שהפך לחלק, משיי ומטופח לחלוטין. 
+                    התוצאה עמידה עד 6 חודשים עם מראה טבעי ובריא.</div>
+                    <div class="treatment-type">טיפול יפני מקצועי</div>
                 </div>
             </div>
             
             <div class="comparison-card">
                 <div class="comparison-images">
                     <div class="before-after before">
-                        <img src="images/תמונה 2 לפני.jfif" alt="תמונה 2 לפני">
-                        <div class="label">לפני</div>
+                        <img src="images/תמונה 2 לפני.jfif" alt="שיער לפני החלקה - תמונה 2">
+                        <div class="label">לפני הטיפול</div>
                     </div>
                     <div class="before-after after">
-                        <img src="images/תמונה 2 אחרי.jfif" alt="תמונה 2 אחרי">
-                        <div class="label">אחרי</div>
+                        <img src="images/תמונה 2 אחרי.jfif" alt="שיער אחרי החלקה - תמונה 2">
+                        <div class="label">אחרי הטיפול</div>
                     </div>
                 </div>
                 <div class="card-info">
-                    <div class="card-title">השוואה שנייה</div>
-                    <div class="card-description">שינוי מדהים בתוצאות</div>
+                    <div class="card-title">החלקה ברזילאית טבעית</div>
+                    <div class="card-description">שיער פריז ולא מסודר שקיבל מראה חלק וטבעי. 
+                    הטיפול משמר את הנפח הטבעי תוך מתן חלקות מושלמת.</div>
+                    <div class="treatment-type">טיפול ברזילאי מעודן</div>
                 </div>
             </div>
             
             <div class="comparison-card">
                 <div class="comparison-images">
                     <div class="before-after before">
-                        <img src="images/תמונה 3 לפני.jfif" alt="תמונה 3 לפני">
-                        <div class="label">לפני</div>
+                        <img src="images/תמונה 3 לפני.jfif" alt="שיער לפני החלקה - תמונה 3">
+                        <div class="label">לפני הטיפול</div>
                     </div>
                     <div class="before-after after">
-                        <img src="images/תמונה 3 אחרי.jfif" alt="תמונה 3 אחרי">
-                        <div class="label">אחרי</div>
+                        <img src="images/תמונה 3 אחרי.jfif" alt="שיער אחרי החלקה - תמונה 3">
+                        <div class="label">אחרי הטיפול</div>
                     </div>
                 </div>
                 <div class="card-info">
-                    <div class="card-title">השוואה שלישית</div>
-                    <div class="card-description">התקדמות יוצאת דופן</div>
+                    <div class="card-title">טיפול קרטין מתקדם</div>
+                    <div class="card-description">שיער פגום ויבש שקיבל חיים חדשים עם ברק טבעי וחלקות מושלמת. 
+                    הקרטין מזין ומחזק את השיער מבפנים.</div>
+                    <div class="treatment-type">טיפול קרטין משקם</div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <h3>צרו קשר לייעוץ ותיאום תור</h3>
+            <div class="contact-info">
+                <div class="contact-item">📍 כתובת: רחוב הראשי 123, תל אביב</div>
+                <div class="contact-item">📞 טלפון: 050-1234567</div>
+                <div class="contact-item">🕐 שעות פתיחה: א׳-ה׳ 9:00-19:00</div>
+                <div class="contact-item">⭐ ניסיון מעל 10 שנים בהחלקות מתקדמות</div>
             </div>
         </div>
     </div>
