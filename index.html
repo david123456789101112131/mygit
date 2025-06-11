@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עטרה - החלקות שיער מקצועיות</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 50px 0;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .services {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .services h2 {
+            color: #764ba2;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            opacity: 0.9;
+        }
+        
+        .contact {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .contact h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        
+        .phone {
+            background: #764ba2;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            display: inline-block;
+            text-decoration: none;
+            margin: 20px 0;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        
+        .phone:hover {
+            background: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .services, .contact {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 עטרה 🌟</h1>
+            <p>החלקות שיער מקצועיות ומתקדמות</p>
+        </div>
+        
+        <div class="services">
+            <h2>השירותים שלנו</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>החלקה יפנית</h3>
+                    <p>טיפול מתקדם להחלקה עמוקה ומתמשכת</p>
+                </div>
+                <div class="service-card">
+                    <h3>החלקה ברזילאית</h3>
+                    <p>החלקה טבעית לשיער רך ומשיי</p>
+                </div>
+                <div class="service-card">
+                    <h3>טיפולי קרטין</h3>
+                    <p>חידוש וחיזוק השיער עם קרטין איכותי</p>
+                </div>
+                <div class="service-card">
+                    <h3>עיצוב וסטיילינג</h3>
+                    <p>עיצוב מקצועי לכל אירוע</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h2>צרו קשר</h2>
+            <div class="contact-info">
+                <p>📍 כתובת: רחוב הראשי 123, תל אביב</p>
+                <p>🕐 שעות פעילות: ראשון-חמישי 9:00-19:00</p>
+                <p>⭐ ניסיון של למעלה מ-10 שנים</p>
+            </div>
+            <a href="tel:050-1234567" class="phone">📞 התקשרו עכשיו: 050-1234567</a>
+        </div>
+    </div>
+</body>
+</html> 
