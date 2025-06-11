@@ -1,0 +1,2767 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סטייל ביוטי - מוצרי טיפוח מקצועיים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/he.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        body {
+            background-color: #fbfcfd;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .top-bar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 90px !important;
+            width: 200px !important;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo::before {
+            content: none;
+        }
+
+        .logo-text {
+            display: none;
+        }
+
+        .logo-text::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(45deg, #DAA520, #B8860B);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-text::after {
+            transform: scaleX(1);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #3498db;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(45deg, var(--product-color) 0%, var(--product-color-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Product category colors */
+        .product-card[data-category="shampoo"] .product-image {
+            --product-color: #2980b9;
+            --product-color-light: #3498db;
+        }
+
+        .product-card[data-category="mask"] .product-image {
+            --product-color: #8e44ad;
+            --product-color-light: #9b59b6;
+        }
+
+        .product-card[data-category="oil"] .product-image {
+            --product-color: #d4ac0d;
+            --product-color-light: #f1c40f;
+        }
+
+        .product-card[data-category="styling"] .product-image {
+            --product-color: #27ae60;
+            --product-color-light: #2ecc71;
+        }
+
+        .product-card[data-category="scalp"] .product-image {
+            --product-color: #c0392b;
+            --product-color-light: #e74c3c;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #2980b9;
+        }
+
+        .categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #3498db;
+            color: #3498db;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-info i {
+            margin-left: 10px;
+            color: #3498db;
+        }
+
+        .hero-section {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* סגנונות לעגלת קניות */
+        .cart-page {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cart-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(120,119,198,0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(120,200,255,0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cart-page.active {
+            display: block;
+            animation: slideInCart 0.5s ease-out;
+        }
+
+        @keyframes slideInCart {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cart-page h2 {
+            text-align: center;
+            color: white;
+            font-size: 42px;
+            margin: 40px 0;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cart-page h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b9d, #c44569);
+            border-radius: 2px;
+        }
+
+        .cart-items {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 35px;
+            margin: 20px auto;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15),
+                        inset 0 1px 0 rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cart-items h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: slideInItem 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .cart-item:nth-child(1) { animation-delay: 0.1s; }
+        .cart-item:nth-child(2) { animation-delay: 0.2s; }
+        .cart-item:nth-child(3) { animation-delay: 0.3s; }
+        .cart-item:nth-child(4) { animation-delay: 0.4s; }
+        .cart-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideInItem {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cart-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cart-item:hover::before {
+            left: 100%;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15),
+                        0 0 0 1px rgba(255,255,255,0.3);
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+            margin-right: 25px;
+            position: relative;
+        }
+
+        .cart-item-details h4 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-details h4::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .cart-item-details .item-price {
+            color: #e74c3c;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(231,76,60,0.3);
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cart-item-details .item-category {
+            color: #7f8c8d;
+            font-size: 14px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.8), rgba(248,249,250,0.8));
+            padding: 8px 14px;
+            border-radius: 25px;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.5);
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .remove-item {
+            background: linear-gradient(45deg, #ff6b9d, #e74c3c);
+            color: white;
+            border: none;
+            padding: 15px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 16px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 16px rgba(255,107,157,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .remove-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .remove-item:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .remove-item:hover {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 12px 24px rgba(231,76,60,0.4);
+        }
+
+        .cart-summary {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-summary h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 10px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .summary-line:last-of-type {
+            border-bottom: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .checkout-button {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(39,174,96,0.3);
+        }
+
+        .checkout-button:hover {
+            background: linear-gradient(45deg, #219a52, #27ae60);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39,174,96,0.4);
+        }
+
+        .checkout-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 40px;
+            color: #7f8c8d;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .empty-cart i {
+            font-size: 80px;
+            margin-bottom: 25px;
+            color: rgba(255,255,255,0.6);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .empty-cart h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .empty-cart p {
+            color: rgba(255,255,255,0.8);
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .continue-shopping {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 15px 30px rgba(102,126,234,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .continue-shopping::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .continue-shopping:hover::before {
+            left: 100%;
+        }
+
+        .continue-shopping:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(102,126,234,0.5);
+        }
+
+        /* Responsive Design לעמוד הסל */
+        @media (max-width: 768px) {
+            .cart-page {
+                padding: 20px 10px;
+            }
+            
+            .cart-page h2 {
+                font-size: 28px;
+                margin: 20px 0;
+            }
+            
+            .cart-items {
+                padding: 25px 20px;
+                margin: 15px;
+            }
+            
+            .cart-item {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+                transform: none;
+                animation: fadeIn 0.5s ease-out;
+            }
+
+            .cart-item:hover {
+                transform: translateY(-5px);
+            }
+            
+            .cart-item-details {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .cart-item-details h4 {
+                font-size: 20px;
+                justify-content: center;
+            }
+
+            .cart-item-details .item-price {
+                font-size: 24px;
+            }
+
+            .empty-cart {
+                padding: 40px 20px;
+            }
+
+            .empty-cart i {
+                font-size: 60px;
+            }
+
+            .empty-cart h3 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cart-page h2 {
+                font-size: 24px;
+            }
+
+            .cart-items {
+                padding: 20px 15px;
+                margin: 10px;
+            }
+
+            .cart-item {
+                padding: 15px;
+            }
+
+            .cart-item-details h4 {
+                font-size: 18px;
+            }
+
+            .cart-item-details .item-price {
+                font-size: 22px;
+            }
+
+            .remove-item {
+                width: 45px;
+                height: 45px;
+                padding: 12px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* סגנונות לטופס תשלום */
+        .payment-form {
+            display: none;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .payment-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* סגנונות למדור הזמנת תורים */
+        .booking-section {
+            background: white;
+            padding: 20px 0;
+            margin: 5px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .booking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .booking-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .booking-service {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .booking-service i {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 20px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .booking-service:hover {
+            transform: translateY(-5px);
+        }
+
+        .booking-service:hover i {
+            transform: scale(1.1);
+        }
+
+        .booking-service h3 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .booking-service p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .book-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .book-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52,152,219,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .booking-grid {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+        }
+
+        /* סגנונות למדור תמונות לפני/אחרי */
+        .before-after-section {
+            padding: 20px 0;
+            background: #f8f9fa;
+            box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.03),
+                        inset 0 -2px 15px rgba(0, 0, 0, 0.03);
+            margin-top: 5px;
+        }
+
+        .before-after-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .before-after-title {
+            text-align: center;
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .before-after-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .before-after-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .before-after-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .before-after-text {
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .before-after-text h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .before-after-text p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* סגנונות למודל הזמנת תורים */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .booking-modal.active {
+            display: flex;
+        }
+
+        .booking-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #e74c3c;
+        }
+
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .booking-steps::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: calc((100% / 3) * var(--step-progress, 1));
+            height: 2px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            transition: width 0.3s ease;
+        }
+
+        .booking-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .booking-step.active .step-number {
+            background: #3498db;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.2);
+        }
+
+        .booking-step.completed .step-number {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .service-select {
+            width: 100%;
+            padding: 15px;
+            padding-left: 15px;
+            padding-right: 45px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            appearance: none;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat left 15px center;
+            background-size: 20px;
+            cursor: pointer;
+            direction: rtl;
+        }
+
+        .service-select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .time-slot {
+            padding: 12px 8px;
+            text-align: center;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .time-slot:hover:not(.disabled) {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+        }
+
+        .time-slot.selected {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .time-slot.disabled {
+            background: #f8f9fa;
+            color: #aaa;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        .time-slot.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .booking-form input::placeholder {
+            color: #999;
+            opacity: 1;
+        }
+
+        .booking-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .nav-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .prev-button {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .next-button {
+            background: #3498db;
+            color: white;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message i {
+            font-size: 60px;
+            color: #2ecc71;
+            margin-bottom: 25px;
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-message h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .success-message p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        #datePicker {
+            width: 100%;
+            padding: 15px;
+            padding-left: 15px;
+            padding-right: 45px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") no-repeat left 15px center;
+            background-size: 20px;
+            direction: rtl;
+        }
+
+        #datePicker:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+
+        .flatpickr-calendar {
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .flatpickr-calendar.arrowTop:before,
+        .flatpickr-calendar.arrowTop:after {
+            border-bottom-color: #3498db;
+        }
+
+        .flatpickr-current-month {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        .flatpickr-day.selected,
+        .flatpickr-day.selected:hover {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .booking-form-step {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .booking-form-step h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .booking-form-step .form-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .booking-form-step input {
+            width: 100%;
+            padding: 12px;
+            padding-right: 45px;
+            margin-bottom: 0;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            direction: rtl;
+        }
+
+        .booking-form-step input:focus {
+            border-color: #3498db;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            outline: none;
+        }
+
+        .booking-form-step input::placeholder {
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+
+        .booking-form-step input:focus::placeholder {
+            opacity: 0.7;
+            transform: translateX(-5px);
+        }
+
+        .booking-form-step .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+
+        .booking-form-step .form-group input:focus + i {
+            color: #3498db;
+        }
+
+        .booking-form-step.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .logo img {
+                height: 70px !important;
+                width: 160px !important;
+            }
+
+            .hero-section {
+                height: 400px;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .booking-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .before-after-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .categories {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px;
+            }
+
+            .category-btn {
+                font-size: 14px;
+                padding: 6px 15px;
+                margin: 5px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+                padding: 20px;
+            }
+
+            /* תיקונים לניווט במובייל */
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 15px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 24px;
+                color: #2c3e50;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            .header-content {
+                position: relative;
+            }
+
+            .time-slot {
+                padding: 12px;
+                font-size: 16px;
+                margin: 5px;
+                touch-action: manipulation;
+            }
+
+            .nav-button {
+                padding: 15px 25px;
+                font-size: 16px;
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .booking-nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .prev-button {
+                order: 2;
+            }
+
+            .next-button {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                font-size: 12px;
+                padding: 5px;
+            }
+
+            .logo img {
+                height: 60px !important;
+                width: 140px !important;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-button {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .booking-modal-content {
+                padding: 20px;
+                width: 95%;
+                margin: 10px;
+                height: auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .time-slot {
+                padding: 15px 10px;
+                font-size: 16px;
+                margin: 0;
+            }
+
+            .nav-button {
+                padding: 15px;
+                font-size: 18px;
+                margin: 0;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .remove-item {
+                margin-top: 10px;
+            }
+        }
+
+        /* תיקון למסכים בינוניים */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+
+            .booking-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .before-after-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-content {
+                padding: 0 15px;
+            }
+        }
+
+        /* הוספת כפתור תפריט למובייל */
+        .mobile-menu-button {
+            display: none;
+        }
+
+        /* סגנונות לטופס קביעת תורים */
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background: #2980b9;
+        }
+
+        .submit-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        /* התאמה למובייל */
+        @media (max-width: 768px) {
+            .booking-form {
+                padding: 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 14px;
+            }
+
+            .submit-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        .booking-form-step .form-group {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .booking-form-step input {
+            width: 100%;
+            padding: 8px 12px;
+            padding-right: 45px;
+            margin-bottom: 0;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            direction: rtl;
+        }
+
+        .booking-form-step h3 {
+            margin-bottom: 12px;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+
+        .booking-form-step .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        /* Responsive Design Enhancements */
+        @media (max-width: 1200px) {
+            .booking-container, .main-content {
+                max-width: 95%;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .booking-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .booking-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .booking-service {
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .booking-service i {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+
+            .booking-service h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .booking-service p {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .book-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .hero-section {
+                height: 300px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .hero-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            /* טופס הזמנת תורים במובייל */
+            .booking-modal-content {
+                width: 95%;
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .booking-form-step input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .booking-form-step h3 {
+                font-size: 16px;
+            }
+
+            .nav-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .booking-service {
+                padding: 15px;
+            }
+
+            .booking-service i {
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+            .booking-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+            }
+
+            .hero-button {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            /* התאמות נוספות למסכים קטנים מאוד */
+            .booking-steps {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+
+            .booking-step {
+                width: 100%;
+                text-align: right;
+            }
+
+            .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+                margin: 0 0 0 10px;
+                display: inline-flex;
+            }
+
+            .booking-form-step {
+                padding: 10px 0;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .time-slot {
+                padding: 6px;
+                font-size: 12px;
+            }
+        }
+
+        /* תיקון לתצוגת רטינה */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .booking-service, .hero-button, .book-button {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* תמיכה במסכי טאבלט בסיבוב */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .booking-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        /* תיקונים לביצועים במובייל */
+        @media (hover: none) {
+            .booking-service:hover {
+                transform: none;
+            }
+
+            .book-button:hover {
+                transform: none;
+            }
+        }
+
+        /* תמיכה במסכים גדולים במיוחד */
+        @media (min-width: 1400px) {
+            .booking-container {
+                max-width: 1300px;
+            }
+
+            .booking-service {
+                padding: 40px;
+            }
+
+            .booking-service i {
+                font-size: 56px;
+            }
+        }
+
+        .main-content.hidden {
+            display: none;
+        }
+
+        /* סגנונות לטופס תשלום */
+    </style>
+    <script>
+        // חיבור ל-Google Apps Script
+        const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // יש להחליף ב-URL של הסקריפט שלך
+
+        // קוד JavaScript קיים...
+        function updateHeaderHTML() {
+            const header = document.querySelector('.header-content');
+            if (!header.querySelector('.mobile-menu-button')) {
+                const menuButton = document.createElement('button');
+                menuButton.className = 'mobile-menu-button';
+                menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+                menuButton.onclick = toggleMobileMenu;
+                header.insertBefore(menuButton, header.querySelector('.nav-menu'));
+            }
+        }
+
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+            const menuButton = document.querySelector('.mobile-menu-button i');
+            menuButton.classList.toggle('fa-bars');
+            menuButton.classList.toggle('fa-times');
+        }
+
+        // טעינת שעות פנויות
+        async function loadAvailableHours(date) {
+            const timeSelect = document.getElementById('time');
+            timeSelect.innerHTML = '<option value="">טוען שעות...</option>';
+            
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getAvailableHours&date=${date}`);
+                const hours = await response.json();
+                
+                timeSelect.innerHTML = '<option value="">בחר/י שעה</option>';
+                hours.forEach(hour => {
+                    const option = document.createElement('option');
+                    option.value = hour;
+                    option.textContent = hour;
+                    timeSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('שגיאה בטעינת שעות:', error);
+                timeSelect.innerHTML = '<option value="">אירעה שגיאה</option>';
+            }
+        }
+
+        // שליחת טופס
+        async function submitAppointment(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'שולח...';
+            
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    alert('התור נקבע בהצלחה! נשלח אליך אישור במייל.');
+                    form.reset();
+                } else {
+                    alert('אירעה שגיאה בקביעת התור. אנא נסו שוב.');
+                }
+            } catch (error) {
+                console.error('שגיאה בשליחת הטופס:', error);
+                alert('אירעה שגיאה בקביעת התור. אנא נסו שוב.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'קביעת תור';
+            }
+        }
+
+        // האזנה לשינוי תאריך
+        document.getElementById('date').addEventListener('change', (event) => {
+            loadAvailableHours(event.target.value);
+        });
+
+        // עדכון אירועי טעינת הדף
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHeaderHTML();
+            updateStep3HTML();
+        });
+    </script>
+</head>
+<body>
+    <div class="top-bar">
+        משלוח חינם בקנייה מעל 199 ₪ | התקשרו עכשיו: 073-1234567
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="images/לוגו עטרה.jfif" alt="עטרה החלקות - Hair Boutique">
+            </a>
+            <nav class="nav-menu">
+                <a href="#" class="home-link">ראשי</a>
+                <a href="#">מוצרי שיער</a>
+                <a href="#">טיפוח</a>
+                <a href="#">מבצעים</a>
+                <a href="#">צור קשר</a>
+            </nav>
+            <div class="cart-icon" onclick="showCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <img src="https://www.michlalot.co.il/uploaded_files/fe6599ca810bb00f5e71468b1b8b827e.jpg" alt="עטרה החלקות" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4);"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">עטרה החלקות</h1>
+            <p class="hero-subtitle">המומחים להחלקות שיער ולטיפוח מקצועי</p>
+            <a href="#products-grid" class="hero-button">גלי את המוצרים שלנו</a>
+        </div>
+    </div>
+
+    <!-- מדור הזמנת תורים -->
+    <section class="booking-section">
+        <div class="booking-container">
+            <h2 class="booking-title">השירותים שלנו</h2>
+            <div class="booking-grid">
+                <div class="booking-service">
+                    <i class="fas fa-magic"></i>
+                    <h3>החלקת שיער</h3>
+                    <p>החלקות שיער מקצועיות בשיטות מתקדמות</p>
+                    <a href="#" class="book-button">הזמנת תור</a>
+                </div>
+                <div class="booking-service">
+                    <i class="fas fa-cut"></i>
+                    <h3>תספורות</h3>
+                    <p>עיצוב שיער מקצועי ותספורות אופנתיות</p>
+                    <a href="#" class="book-button">הזמנת תור</a>
+                </div>
+                <div class="booking-service">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>צבעי שיער</h3>
+                    <p>צביעת שיער מקצועית בכל הגוונים</p>
+                    <a href="#" class="book-button">הזמנת תור</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- מדור תמונות לפני/אחרי -->
+    <section class="before-after-section">
+        <div class="before-after-container">
+            <h2 class="before-after-title">התוצאות מדברות בעד עצמן</h2>
+            <div class="before-after-grid">
+                <div class="before-after-item">
+                    <div class="before-after-images">
+                        <img src="images/תמונה 1לפני.jfif" alt="לפני החלקה">
+                        <img src="images/תמונה 1 אחרי.jfif" alt="אחרי החלקה">
+                    </div>
+                    <div class="before-after-text">
+                        <h3>החלקת קראטין</h3>
+                        <p>שיער מתולתל הפך לחלק ובריא</p>
+                    </div>
+                </div>
+                <div class="before-after-item">
+                    <div class="before-after-images">
+                        <img src="images/תמונה 2 לפני.jfif" alt="לפני החלקה">
+                        <img src="images/תמונה 2 אחרי.jfif" alt="אחרי החלקה">
+                    </div>
+                    <div class="before-after-text">
+                        <h3>החלקה יפנית</h3>
+                        <p>תוצאות מדהימות שמחזיקות לאורך זמן</p>
+                    </div>
+                </div>
+                <div class="before-after-item">
+                    <div class="before-after-images">
+                        <img src="images/תמונה 3 לפני.jfif" alt="לפני החלקה">
+                        <img src="images/תמונה 3 אחרי.jfif"alt="אחרי החלקה">
+                    </div>
+                    <div class="before-after-text">
+                        <h3>החלקת משי</h3>
+                        <p>שיער רך ומשיי ללא נזק</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="categories">
+            <button class="category-btn active" data-category="all">הכל</button>
+            <button class="category-btn" data-category="shampoo">שמפו</button>
+            <button class="category-btn" data-category="masks">מסכות שיער</button>
+            <button class="category-btn" data-category="oils">שמנים</button>
+            <button class="category-btn" data-category="styling">מוצרי עיצוב</button>
+            <button class="category-btn" data-category="scalp">טיפול בקרקפת</button>
+        </div>
+
+        <div class="products-grid" id="products-grid">
+            <!-- Products will be added dynamically -->
+        </div>
+    </main>
+
+    <!-- עגלת קניות -->
+    <div class="cart-page">
+        <h2>🛍️ עגלת הקניות שלי</h2>
+        <div class="cart-items">
+            <div class="empty-cart" id="empty-cart-message">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>הסל שלך ריק</h3>
+                <p>לא הוספת עדיין מוצרים לסל הקניות</p>
+                <a href="#" class="continue-shopping" onclick="showMainContent()">המשך קניות</a>
+            </div>
+            <div id="cart-items-list">
+                <!-- פריטים יתווספו דינמית -->
+            </div>
+        </div>
+    </div>
+
+    <!-- טופס תשלום -->
+    <div class="payment-form">
+        <h2>פרטי תשלום</h2>
+        <form id="payment-form" onsubmit="processPayment(event)">
+            <div class="form-group">
+                <label>שם מלא</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>מספר טלפון</label>
+                <input type="tel" required>
+            </div>
+            <div class="form-group">
+                <label>אימייל</label>
+                <input type="email" required>
+            </div>
+            <div class="form-group">
+                <label>כתובת למשלוח</label>
+                <input type="text" required>
+            </div>
+            <div class="form-group">
+                <label>מספר כרטיס אשראי</label>
+                <input type="text" required pattern="[0-9]{16}" placeholder="16 ספרות">
+            </div>
+            <div class="form-group">
+                <label>תוקף</label>
+                <input type="text" required placeholder="MM/YY">
+            </div>
+            <div class="form-group">
+                <label>CVV</label>
+                <input type="text" required pattern="[0-9]{3}" placeholder="3 ספרות">
+            </div>
+            <button type="submit" class="checkout-button">אישור תשלום</button>
+        </form>
+    </div>
+
+    <!-- מודל הזמנת תורים -->
+    <div class="booking-modal">
+        <div class="booking-modal-content">
+            <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+            
+            <div class="booking-steps">
+                <div class="booking-step active">
+                    <div class="step-number">1</div>
+                    <div>בחירת שירות</div>
+                </div>
+                <div class="booking-step">
+                    <div class="step-number">2</div>
+                    <div>בחירת מועד</div>
+                </div>
+                <div class="booking-step">
+                    <div class="step-number">3</div>
+                    <div>פרטים אישיים</div>
+                </div>
+            </div>
+
+            <div class="booking-form-step active" id="step1">
+                <h3>בחרי את השירות המבוקש</h3>
+                <select class="service-select" id="serviceSelect">
+                    <option value="">בחרי שירות</option>
+                    <option value="smoothing">החלקת שיער</option>
+                    <option value="haircut">תספורת ועיצוב</option>
+                    <option value="color">צבע שיער</option>
+                </select>
+            </div>
+
+            <div class="booking-form-step" id="step2">
+                <h3>בחרי תאריך ושעה</h3>
+                <input type="text" id="datePicker" placeholder="בחרי תאריך" readonly>
+                <div class="time-slots" id="timeSlots">
+                    <!-- זמנים יתווספו דינמית -->
+                </div>
+            </div>
+
+            <div class="booking-form-step" id="step3">
+                <h3>הזיני את פרטייך</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="שם מלא" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="טלפון" required>
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="אימייל" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="הערות נוספות (לא חובה)">
+                    <i class="fas fa-comment"></i>
+                </div>
+            </div>
+
+            <div class="booking-nav">
+                <button class="nav-button prev-button" onclick="prevStep()" style="display: none;">חזרה</button>
+                <button class="nav-button next-button" onclick="nextStep()">המשך</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ניווט מהיר</h3>
+                <ul>
+                    <li><a href="#">אודות</a></li>
+                    <li><a href="#">מוצרים</a></li>
+                    <li><a href="#">מבצעים</a></li>
+                    <li><a href="#">בלוג</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>שירות לקוחות</h3>
+                <ul>
+                    <li><a href="#">מדיניות משלוחים</a></li>
+                    <li><a href="#">החזרות והחלפות</a></li>
+                    <li><a href="#">שאלות נפוצות</a></li>
+                    <li><a href="#">צור קשר</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>צור קשר</h3>
+                <p><i class="fas fa-phone"></i>073-1234567</p>
+                <p><i class="fas fa-envelope"></i>info@stylebeauty.co.il</p>
+                <p><i class="fas fa-map-marker-alt"></i>רחוב הראשי 123, תל אביב</p>
+                <!-- קישור לפאנל ניהול -->
+                <p style="margin-top: 30px; opacity: 0.4; font-size: 12px;">
+                    <a href="admin-panel.html" style="color: #7f8c8d; text-decoration: none;" title="פאנל ניהול">
+                        © 2024 עטרה החלקות
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to create product card
+        function createProductCard(product) {
+            return `
+                <div class="product-card" data-category="${product.category}">
+                    <img src="images/${product.category}-${product.id}.jpg" 
+                         alt="${product.name}" 
+                         class="product-image" 
+                         onerror="this.onerror=null; handleImageError(this, '${product.category}');">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₪${product.price.toFixed(2)}</div>
+                        <button class="add-to-cart" onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})">הוסף לסל</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to handle image loading errors
+        function handleImageError(img, category) {
+            const fallbackColors = {
+                shampoo: '#2980b9',
+                mask: '#8e44ad',
+                oil: '#d4ac0d',
+                styling: '#27ae60',
+                scalp: '#c0392b'
+            };
+
+            img.style.background = `linear-gradient(45deg, ${fallbackColors[category]} 0%, ${fallbackColors[category]}66 100%)`;
+            img.style.display = 'flex';
+            img.style.alignItems = 'center';
+            img.style.justifyContent = 'center';
+            img.style.color = '#ffffff';
+            img.style.fontSize = '1.2em';
+            img.style.textAlign = 'center';
+            img.style.padding = '20px';
+            img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; // Transparent 1x1 pixel
+        }
+
+        // Product data
+        const products = {
+            shampoo: [
+                { id: 1, name: "שמפו מזין לשיער יבש", price: 89.90, category: "shampoo" },
+                { id: 2, name: "שמפו לשיער צבוע", price: 99.90, category: "shampoo" },
+                { id: 3, name: "שמפו מחזק לשיער דליל", price: 109.90, category: "shampoo" },
+                { id: 4, name: "שמפו לשיער מתולתל", price: 94.90, category: "shampoo" },
+                { id: 5, name: "שמפו טיפולי לקרקפת רגישה", price: 119.90, category: "shampoo" },
+                { id: 6, name: "שמפו לשיער בלונדיני", price: 89.90, category: "shampoo" },
+                { id: 7, name: "שמפו מרענן לשיער שמן", price: 84.90, category: "shampoo" },
+                { id: 8, name: "שמפו לשיער פגום", price: 129.90, category: "shampoo" },
+                { id: 9, name: "שמפו לניקוי עמוק", price: 79.90, category: "shampoo" },
+                { id: 10, name: "שמפו לשיער דק", price: 94.90, category: "shampoo" }
+            ],
+            masks: [
+                { id: 1, name: "מסכת הזנה אינטנסיבית", price: 209.90, category: "mask" },
+                { id: 2, name: "מסכה משקמת לשיער יבש", price: 189.90, category: "mask" },
+                { id: 3, name: "מסכת קרטין מרוכזת", price: 249.90, category: "mask" },
+                { id: 4, name: "מסכת לחות לשיער מתולתל", price: 169.90, category: "mask" },
+                { id: 5, name: "מסכת חלבון לשיער פגום", price: 199.90, category: "mask" },
+                { id: 6, name: "מסכת שיקום אינטנסיבית", price: 229.90, category: "mask" },
+                { id: 7, name: "מסכת צבע לשיער צבוע", price: 179.90, category: "mask" },
+                { id: 8, name: "מסכת ויטמינים לשיער", price: 159.90, category: "mask" },
+                { id: 9, name: "מסכת לילה לשיער", price: 189.90, category: "mask" },
+                { id: 10, name: "מסכת שמן לשיער", price: 149.90, category: "mask" }
+            ],
+            oils: [
+                { id: 1, name: "שמן ארגן טהור", price: 129.90, category: "oil" },
+                { id: 2, name: "שמן מרוקאי לשיער", price: 159.90, category: "oil" },
+                { id: 3, name: "שמן קוקוס לשיער", price: 89.90, category: "oil" },
+                { id: 4, name: "שמן שקדים לשיער", price: 99.90, category: "oil" },
+                { id: 5, name: "שמן מקדמיה לשיער", price: 139.90, category: "oil" },
+                { id: 6, name: "שמן חוחובה לשיער", price: 119.90, category: "oil" },
+                { id: 7, name: "שמן קרטין לשיער", price: 169.90, category: "oil" },
+                { id: 8, name: "שמן אבוקדו לשיער", price: 109.90, category: "oil" },
+                { id: 9, name: "שמן לוז לשיער", price: 129.90, category: "oil" },
+                { id: 10, name: "שמן קנאביס לשיער", price: 199.90, category: "oil" }
+            ],
+            styling: [
+                { id: 1, name: "קרם לעיצוב תלתלים", price: 89.90, category: "styling" },
+                { id: 2, name: "ספריי מחזיק לשיער", price: 69.90, category: "styling" },
+                { id: 3, name: "ג'ל לעיצוב השיער", price: 59.90, category: "styling" },
+                { id: 4, name: "מוס לנפח", price: 79.90, category: "styling" },
+                { id: 5, name: "ווקס לשיער", price: 89.90, category: "styling" },
+                { id: 6, name: "קרם החלקה", price: 99.90, category: "styling" },
+                { id: 7, name: "ספריי מלח", price: 69.90, category: "styling" },
+                { id: 8, name: "קרם לחות לעיצוב", price: 84.90, category: "styling" },
+                { id: 9, name: "פודרה לנפח", price: 79.90, category: "styling" },
+                { id: 10, name: "שמן סרום לעיצוב", price: 109.90, category: "styling" }
+            ],
+            scalp: [
+                { id: 1, name: "טיפול לקרקפת רגישה", price: 149.90, category: "scalp" },
+                { id: 2, name: "סרום לגידול שיער", price: 199.90, category: "scalp" },
+                { id: 3, name: "טיפול נגד קשקשים", price: 129.90, category: "scalp" },
+                { id: 4, name: "מסכה לקרקפת", price: 169.90, category: "scalp" },
+                { id: 5, name: "שמן לקרקפת", price: 139.90, category: "scalp" },
+                { id: 6, name: "פילינג לקרקפת", price: 119.90, category: "scalp" },
+                { id: 7, name: "טוניק לחיזוק השיער", price: 189.90, category: "scalp" },
+                { id: 8, name: "ספריי לקרקפת שמנונית", price: 109.90, category: "scalp" },
+                { id: 9, name: "קרם הרגעה לקרקפת", price: 159.90, category: "scalp" },
+                { id: 10, name: "אמפולות לנשירת שיער", price: 249.90, category: "scalp" }
+            ]
+        };
+
+        // Function to display products
+        function displayProducts(category = 'all') {
+            const productsGrid = document.getElementById('products-grid');
+            productsGrid.innerHTML = '';
+            
+            if (category === 'all') {
+                Object.values(products).forEach(categoryProducts => {
+                    categoryProducts.forEach(product => {
+                        productsGrid.innerHTML += createProductCard(product);
+                    });
+                });
+            } else {
+                products[category].forEach(product => {
+                    productsGrid.innerHTML += createProductCard(product);
+                });
+            }
+
+            // Reattach event listeners to new buttons
+            attachCartListeners();
+        }
+
+        // Function to attach cart listeners
+        function attachCartListeners() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const cartCount = document.querySelector('.cart-count');
+                    const currentCount = parseInt(cartCount.textContent);
+                    cartCount.textContent = currentCount + 1;
+                    
+                    button.textContent = 'נוסף לסל';
+                    button.style.background = '#27ae60';
+                    setTimeout(() => {
+                        button.textContent = 'הוסף לסל';
+                        button.style.background = '#3498db';
+                    }, 1000);
+                });
+            });
+        }
+
+        // Category buttons functionality
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                displayProducts(button.dataset.category);
+            });
+        });
+
+        // Initial display
+        displayProducts();
+
+        // משתנים גלובליים לעגלת קניות
+        let cartItems = [];
+        let total = 0;
+
+        function addToCart(product) {
+            cartItems.push(product);
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            cartCount.textContent = cartItems.length;
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.querySelector('#cart-items-list');
+            const emptyCartMessage = document.querySelector('#empty-cart-message');
+            
+            // חישוב סך הכל
+            total = cartItems.reduce((sum, item) => sum + item.price, 0);
+            const itemCount = cartItems.length;
+            
+            if (itemCount === 0) {
+                // הצגת הודעת סל ריק
+                emptyCartMessage.style.display = 'block';
+                cartItemsContainer.style.display = 'none';
+            } else {
+                // הסתרת הודעת סל ריק והצגת המוצרים
+                emptyCartMessage.style.display = 'none';
+                cartItemsContainer.style.display = 'block';
+                
+                // יצירת רשימת המוצרים
+                cartItemsContainer.innerHTML = '';
+                cartItems.forEach((item, index) => {
+                    const categoryEmojis = {
+                        'shampoo': '🧴',
+                        'mask': '🎭', 
+                        'oil': '🛢️',
+                        'styling': '✨',
+                        'scalp': '💆‍♀️'
+                    };
+                    
+                    const categoryNames = {
+                        'shampoo': 'שמפו',
+                        'mask': 'מסכה',
+                        'oil': 'שמן',
+                        'styling': 'עיצוב',
+                        'scalp': 'קרקפת'
+                    };
+                    
+                    cartItemsContainer.innerHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-details">
+                                <h4>${categoryEmojis[item.category] || '🛍️'} ${item.name}</h4>
+                                <div class="item-price">₪${item.price.toFixed(2)}</div>
+                                <div class="item-category">${categoryNames[item.category] || 'מוצר'}</div>
+                            </div>
+                            <button class="remove-item" onclick="removeItem(${index})" title="הסר מהסל">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        function removeItem(index) {
+            cartItems.splice(index, 1);
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function showCart() {
+            document.querySelector('.main-content').classList.add('hidden');
+            document.querySelector('.hero-section').style.display = 'none';
+            document.querySelector('.booking-section').style.display = 'none';
+            document.querySelector('.before-after-section').style.display = 'none';
+            document.querySelector('.cart-page').classList.add('active');
+            document.querySelector('.payment-form').classList.remove('active');
+            updateCartDisplay();
+        }
+
+        function showPaymentForm() {
+            document.querySelector('.cart-page').classList.remove('active');
+            document.querySelector('.payment-form').classList.add('active');
+        }
+
+        function processPayment(event) {
+            event.preventDefault();
+            alert('ההזמנה התקבלה בהצלחה!');
+            cartItems = [];
+            updateCartCount();
+            window.location.href = window.location.href; // רענון הדף
+        }
+
+        function showMainContent() {
+            document.querySelector('.main-content').classList.remove('hidden');
+            document.querySelector('.hero-section').style.display = 'flex';
+            document.querySelector('.booking-section').style.display = 'block';
+            document.querySelector('.before-after-section').style.display = 'block';
+            document.querySelector('.cart-page').classList.remove('active');
+            document.querySelector('.payment-form').classList.remove('active');
+        }
+
+        // הוספת אירוע לחיצה על הלוגו/דף הבית
+        document.querySelector('.home-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMainContent();
+        });
+
+        document.querySelector('.logo').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMainContent();
+        });
+
+        // עדכון כפתורי ההזמנה
+        document.querySelectorAll('.book-button').forEach(button => {
+            button.onclick = function(e) {
+                e.preventDefault();
+                showBookingModal();
+            };
+        });
+
+        // עדכון ה-HTML של שלב הפרטים האישיים
+        function updateStep3HTML() {
+            const step3 = document.getElementById('step3');
+            step3.innerHTML = `
+                <h3>הזיני את פרטייך</h3>
+                <div class="form-group">
+                    <input type="text" placeholder="שם מלא" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="טלפון" required>
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="אימייל" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="הערות נוספות (לא חובה)">
+                    <i class="fas fa-comment"></i>
+                </div>
+            `;
+        }
+
+        // קריאה לפונקציה כשהדף נטען
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStep3HTML();
+        });
+
+        // קוד להזמנת תורים
+        let currentStep = 1;
+        let selectedService = '';
+        let selectedDate = '';
+        let selectedTime = '';
+
+        function showBookingModal() {
+            document.querySelector('.booking-modal').classList.add('active');
+            initializeDatePicker();
+        }
+
+        function closeBookingModal() {
+            document.querySelector('.booking-modal').classList.remove('active');
+        }
+
+        function initializeDatePicker() {
+            // קריאת תאריכים חסומים מפאנל הניהול
+            const blockedDates = JSON.parse(localStorage.getItem('blockedDates') || '[]');
+            const businessHours = JSON.parse(localStorage.getItem('businessHours') || '{}');
+            
+            flatpickr("#datePicker", {
+                locale: "he",
+                dateFormat: "d/m/Y",
+                minDate: "today",
+                maxDate: new Date().fp_incr(30), // 30 ימים קדימה
+                disable: [
+                    function(date) {
+                        // חסימת שישי שבת אם לא מוגדר אחרת בפאנל ניהול
+                        const dayOfWeek = date.getDay();
+                        const dayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+                        const dayKey = dayNames[dayOfWeek];
+                        
+                        // אם יש הגדרות בפאנל ניהול, השתמש בהן
+                        if (businessHours[dayKey]) {
+                            return !businessHours[dayKey].active;
+                        }
+                        
+                        // אחרת, חסום שישי ושבת כברירת מחדל
+                        return (dayOfWeek === 5 || dayOfWeek === 6);
+                    },
+                    // חסימת תאריכים ספציפיים מפאנל הניהול
+                    ...blockedDates
+                ],
+                onChange: function(selectedDates, dateStr) {
+                    selectedDate = dateStr;
+                    generateTimeSlots(selectedDates[0]);
+                }
+            });
+        }
+
+        function generateTimeSlots(date) {
+            const timeSlots = document.getElementById('timeSlots');
+            timeSlots.innerHTML = '';
+            
+            // קריאת שעות פעילות מפאנל הניהול
+            const businessHours = JSON.parse(localStorage.getItem('businessHours') || '{}');
+            
+            // קביעת יום בשבוע
+            const dayOfWeek = date.getDay();
+            const dayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+            const dayKey = dayNames[dayOfWeek];
+            
+            // שעות ברירת מחדל אם אין הגדרות בפאנל ניהול
+            let startHour = 9;
+            let endHour = 19;
+            
+            // אם יש הגדרות בפאנל ניהול, השתמש בהן
+            if (businessHours[dayKey] && businessHours[dayKey].active) {
+                const openTime = businessHours[dayKey].open.split(':');
+                const closeTime = businessHours[dayKey].close.split(':');
+                startHour = parseInt(openTime[0]);
+                endHour = parseInt(closeTime[0]);
+                
+                // אם הדקות לא 00, הוסף שעה
+                if (parseInt(closeTime[1]) > 0) {
+                    endHour += 1;
+                }
+            }
+            
+            // יצירת השעות
+            for (let hour = startHour; hour < endHour; hour++) {
+                for (let minutes of ['00', '30']) {
+                    const timeString = `${hour.toString().padStart(2, '0')}:${minutes}`;
+                    const slot = document.createElement('div');
+                    slot.className = 'time-slot';
+                    slot.textContent = timeString;
+                    
+                    // בדיקה אם התור פנוי (סימולציה)
+                    const isAvailable = Math.random() > 0.3;
+                    
+                    if (!isAvailable) {
+                        slot.classList.add('disabled');
+                    } else {
+                        slot.onclick = () => selectTimeSlot(slot);
+                    }
+                    
+                    timeSlots.appendChild(slot);
+                }
+            }
+            
+            // הודעה אם אין שעות זמינות
+            if (timeSlots.children.length === 0) {
+                const noSlotsMessage = document.createElement('div');
+                noSlotsMessage.className = 'no-slots-message';
+                noSlotsMessage.style.cssText = `
+                    text-align: center;
+                    padding: 20px;
+                    color: #7f8c8d;
+                    font-style: italic;
+                `;
+                noSlotsMessage.textContent = 'אין שעות זמינות ליום זה';
+                timeSlots.appendChild(noSlotsMessage);
+            }
+        }
+
+        function updateSteps() {
+            document.querySelectorAll('.booking-step').forEach((step, index) => {
+                step.classList.toggle('active', index + 1 <= currentStep);
+                step.classList.toggle('completed', index + 1 < currentStep);
+            });
+            
+            document.querySelectorAll('.booking-form-step').forEach((step, index) => {
+                step.classList.toggle('active', index + 1 === currentStep);
+            });
+            
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+            
+            prevButton.style.display = currentStep === 1 ? 'none' : 'block';
+            nextButton.textContent = currentStep === 3 ? 'אישור הזמנה' : 'המשך';
+        }
+
+        function nextStep() {
+            if (currentStep === 1) {
+                selectedService = document.getElementById('serviceSelect').value;
+                if (!selectedService) {
+                    alert('נא לבחור שירות');
+                    return;
+                }
+            } else if (currentStep === 2) {
+                selectedDate = document.getElementById('datePicker').value;
+                selectedTime = document.querySelector('.time-slot.selected')?.textContent;
+                if (!selectedDate || !selectedTime) {
+                    alert('נא לבחור תאריך ושעה');
+                    return;
+                }
+            } else if (currentStep === 3) {
+                // בדיקת הטופס
+                const form = document.querySelector('.booking-form-step.active');
+                const inputs = form.querySelectorAll('input[required]');
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.value) {
+                        isValid = false;
+                        input.style.borderColor = '#e74c3c';
+                    } else {
+                        input.style.borderColor = '#eee';
+                    }
+                });
+                if (!isValid) {
+                    alert('נא למלא את כל השדות החובה');
+                    return;
+                }
+                submitBooking();
+                return;
+            }
+            
+            currentStep = Math.min(currentStep + 1, 3);
+            updateSteps();
+        }
+
+        function prevStep() {
+            currentStep = Math.max(currentStep - 1, 1);
+            updateSteps();
+        }
+
+        function submitBooking() {
+            const formData = {
+                service: selectedService,
+                date: selectedDate,
+                time: selectedTime,
+                name: document.querySelector('#step3 input[placeholder="שם מלא"]').value,
+                phone: document.querySelector('#step3 input[placeholder="טלפון"]').value,
+                email: document.querySelector('#step3 input[placeholder="אימייל"]').value
+            };
+            
+            // כאן תהיה קריאת שרת אמיתית
+            setTimeout(() => {
+                const modalContent = document.querySelector('.booking-modal-content');
+                modalContent.innerHTML = `
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h2>התור נקבע בהצלחה!</h2>
+                        <p>נשלח אליך אישור במייל ובהודעת SMS</p>
+                        <button class="nav-button next-button" onclick="closeBookingModal()">סגירה</button>
+                    </div>
+                `;
+            }, 1000);
+        }
+
+        // עדכון בחירת שעה
+        function selectTimeSlot(slot) {
+            if (slot.classList.contains('disabled')) return;
+            
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            slot.classList.add('selected');
+            selectedTime = slot.textContent;
+        }
+    </script>
+</body>
+</html> 
